@@ -16,7 +16,7 @@ public class Connection {
         this.incoming = s1;
         InputStream inputStream = incoming.getInputStream();
         OutputStream outputStream = incoming.getOutputStream();
-        PrintWriter out = new PrintWriter(outputStream, true);
+        out = new PrintWriter(outputStream, true);
 
         Scanner in = new Scanner(inputStream);
 
