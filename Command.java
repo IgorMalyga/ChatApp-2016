@@ -25,7 +25,7 @@
 
     //public Command.CommandType type;
 }*/
-
+package Chat;
 public class Command {
 
     public Command(Command.CommandType t) {

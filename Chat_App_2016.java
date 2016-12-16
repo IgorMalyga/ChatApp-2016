@@ -1,4 +1,4 @@
-
+package Chat;
 
 import java.awt.EventQueue;
 
