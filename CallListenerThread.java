@@ -1,4 +1,4 @@
-
+package Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,10 +47,10 @@ public class CallListenerThread implements Runnable {
                 this.m.setConnection(c);
                 this.m.getClt().strtClt();
                 if (m.getRemoteLogin().equals("username")){
+                	
                 	thr.sleep(10);
-                    System.out.println(remoteLogin);
                 }
-                System.out.println(m.getRemoteLogin()+"!");  
+                System.out.println(m.getRemoteLogin());  
                 connection_request fr = new connection_request(incoming,m.getRemoteLogin(),this);
                 
                 

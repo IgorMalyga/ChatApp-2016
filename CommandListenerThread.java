@@ -1,6 +1,8 @@
-import java.util.Observable;
+package Chat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CommandListenerThread extends Observable implements Runnable {
+public class CommandListenerThread extends Thread {
 
     private Command lastCommand;
     private Connection connection;
@@ -11,6 +13,7 @@ public class CommandListenerThread extends Observable implements Runnable {
 
     public CommandListenerThread(Connection con) {
         connection = con;
+        lastCommand = new Command(Command.CommandType.ACCEPT);
     }
 
     @Override
@@ -27,5 +30,11 @@ public class CommandListenerThread extends Observable implements Runnable {
     }
 
     public Command getLastCommand(){return lastCommand;}
-//dfgfdgdfgfd
+
+    private class NewCommandAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
 }

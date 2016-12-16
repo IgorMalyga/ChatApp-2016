@@ -1,4 +1,4 @@
-
+package Chat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 
-//////////////////////////////////пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//////////////////////////////////отвечает за прием сообщений
 
 
 
@@ -33,7 +33,7 @@ public class Receiver implements Runnable {
 				BufferedReader i = new BufferedReader(new InputStreamReader(s.getInputStream()));
 				String str = i.readLine();
 				System.out.println("client of chat: message received");
-				System.out.println("client of chat: message: пїЅ" + str + "пїЅ");
+				System.out.println("client of chat: message: «" + str + "»");
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
