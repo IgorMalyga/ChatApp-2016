@@ -1,7 +1,13 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import javax.swing.JFrame;
 
 ///////////////////////////// ���� ����������� ������ ��������
 
@@ -10,11 +16,16 @@ public class CallListenerThread implements Runnable {
     private Socket incoming;
     private boolean status; // busy = false
     private String LocalLogin;
+    private String remoteLogin;
+    NewJFrame m ;
+    Connection c;
+	private Thread thr;
 
-    public CallListenerThread(String LL) throws IOException {
-        s = new ServerSocket(Protocole.getPort());
+    public CallListenerThread(String LL,NewJFrame NewJFrame) throws IOException {
+        this.m=NewJFrame;
+    	s = new ServerSocket(Protocole.getPort());
         LocalLogin=LL;
-        Thread thr = new Thread(this);
+        thr= new Thread(this);
         thr.start();
     }
 
@@ -31,11 +42,27 @@ public class CallListenerThread implements Runnable {
 
             try {
                 incoming = s.accept();
-                connection_request fr = new connection_request(incoming,LocalLogin);
+                c=new Connection(incoming);
+                System.out.println(c);
+                this.m.setConnection(c);
+                this.m.getClt().strtClt();
+                if (m.getRemoteLogin().equals("username")){
+                	thr.sleep(10);
+                    System.out.println(remoteLogin);
+                }
+                System.out.println(m.getRemoteLogin()+"!");  
+                connection_request fr = new connection_request(incoming,m.getRemoteLogin(),this);
+                
+                
+                /*Connection con = new Connection(incoming);
+                CommandListenerThread clt = new CommandListenerThread(con);*/
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }
+            } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
         }
 
@@ -48,5 +75,10 @@ public class CallListenerThread implements Runnable {
     public void setLocalLogin(String localLogin) {
         this.LocalLogin = localLogin;
     }
+
+	public void setConnection(Connection c2) {
+		// TODO Auto-generated method stub
+		this.c=c2;
+	}
 
 }

@@ -15,15 +15,16 @@ import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.SwingConstants;
+import javax.swing.JList;
 
-public class connection_request {
+public class connection_request  {
 
     private JFrame frmIteration;
     private Connection c;
     private String localLogin;
     private Socket s;
     private String rem_login="username";
-
+    CallListenerThread clt;
     /**
      * Launch the application.
      */
@@ -43,12 +44,14 @@ public class connection_request {
     /**
      * Create the application.
      */
-    public connection_request(Socket s1,String log) {
-        localLogin=log;
+    public connection_request(Socket s1,String log,CallListenerThread clt) throws IOException {
+        this.clt=clt;
+        System.out.println(log+"dop form got login");
+    	rem_login=log;
         s=s1;
         initialize();
         this.frmIteration.setVisible(true);
-
+        localLogin=clt.getLocalLogin();
     }
     public class AcceptAction implements ActionListener{
 
@@ -58,6 +61,8 @@ public class connection_request {
             try {
                 c=new Connection(s);
                 c.sendnNickHello( localLogin );
+                clt.setConnection(c);
+               
                 //rem_login=c.getNickHello();
                 frmIteration.dispose();
             } catch (IOException e) {
@@ -65,22 +70,14 @@ public class connection_request {
                 e.printStackTrace();
             }
         }
-
     }
 
     public class DeclineAction implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            // TODO Auto-generated method stub
-            try {
-                c=new Connection(s);
-                c.disconnect();
-                frmIteration.dispose();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            clt.m.setConnection(null);
+			frmIteration.dispose();
         }
 
     }
@@ -116,5 +113,4 @@ public class connection_request {
         lblUserXxxxWants.setBounds(83, 55, 188, 31);
         panel.add(lblUserXxxxWants);
     }
-
 }

@@ -1,10 +1,10 @@
-package Chat;
+
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-///////////////////////////// ждет подключения других клиентов
+
 
 public class CallListener implements Runnable {
 	private ServerSocket s;
