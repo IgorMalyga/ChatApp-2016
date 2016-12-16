@@ -1,11 +1,11 @@
-
+package Chat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.*;
 import java.util.Scanner;
 
-//////////////////пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//////////////////отправка сообщений
 
 public class Sender implements Runnable {
 
