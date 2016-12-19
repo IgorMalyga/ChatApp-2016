@@ -1,4 +1,3 @@
-package Chat;
 
 import java.io.*;
 import java.net.*;
@@ -39,7 +38,7 @@ class client implements Runnable {
 				String str = i.readLine();
 				System.out.println("client : message received");
 
-				System.out.println("client : message: «" + str+"»");
+				System.out.println("client : message: ï¿½" + str+"ï¿½");
 
 			} catch (UnknownHostException e) {
 				e.printStackTrace();

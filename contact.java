@@ -1,4 +1,4 @@
-package Chat;
+
 
 import java.io.Serializable;
 
@@ -11,6 +11,9 @@ public class contact implements Serializable{
   }
 public String getName() {
 	return name;
+}
+public String getIp(){
+      return ip.toString();
 }
 public void setName(String name) {
 	this.name = name;

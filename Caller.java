@@ -1,4 +1,4 @@
-package Chat;
+
 
 import java.io.IOException;
 import java.net.Socket;
@@ -25,8 +25,10 @@ public class Caller {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			this.m.getjTextArea1().append("Incorrect IP/User offline;\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			this.m.getjTextArea1().append("Incorrect IP/User offline;\n");
 			e.printStackTrace();
 		}
 		Connection c = new Connection(s);
