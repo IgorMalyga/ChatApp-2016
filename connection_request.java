@@ -79,7 +79,8 @@ public class connection_request  {
         public void actionPerformed(ActionEvent arg0) {
         	try {
 				c=new Connection(s);
-				  m.getjButton1().setEnabled(false);
+				    m.getjButton1().setEnabled(false);
+				   m.getjButton5().setEnabled(false);
 	                m.getjButton4().setEnabled(true);
 	                m.getjButton2().setEnabled(true);
 				c.sendReject();
