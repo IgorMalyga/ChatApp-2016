@@ -1,4 +1,4 @@
-
+package Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,8 +51,11 @@ public class CallListenerThread implements Runnable {
                     System.out.println(remoteLogin);
                 }
                 System.out.println(m.getRemoteLogin()+"!");  
-                connection_request fr = new connection_request(incoming,m.getRemoteLogin(),this);
-                
+                connection_request fr = new connection_request(incoming,m.getRemoteLogin(),this,m);
+                if (incoming!=null){
+                	this.m.getjButton1().setEnabled(true);
+                	this.m.getjButton5().setEnabled(true);
+                }
                 
                 /*Connection con = new Connection(incoming);
                 CommandListenerThread clt = new CommandListenerThread(con);*/

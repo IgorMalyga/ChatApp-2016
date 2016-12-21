@@ -1,4 +1,4 @@
-
+package Chat;
 
 import java.awt.EventQueue;
 
@@ -37,6 +37,7 @@ public class Reject_Message {
 	 */
 	public Reject_Message() {
 		initialize();
+		this.frmChatapp.setVisible(true);
 	}
 
 	/**

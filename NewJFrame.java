@@ -1,6 +1,8 @@
-
+package Chat;
 
 import javax.swing.*;
+
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -83,7 +85,14 @@ public class NewJFrame extends javax.swing.JFrame {
 					Caller caller = new Caller(locLogin, ip, m);
 					try {
 						incoming = caller.call();
+						if (incoming != null) {
+							getjButton5().setEnabled(true);
+							getjButton1().setEnabled(true);
+							getjButton2().setEnabled(false);
+							jButton4.setEnabled(false);
+						}
 						setClt(new CommandListenerThread2(incoming));
+
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -155,6 +164,10 @@ public class NewJFrame extends javax.swing.JFrame {
 							remLog.setText("   Rem login: " + RemoteLogin);
 						}
 						if (arr[0].equals("REJECT")) {
+	       jButton1.setEnabled(false);
+	       getjButton2().setEnabled(true);
+	       jButton4.setEnabled(true);
+	       
 
 							Reject_Message rm = new Reject_Message();
 
@@ -184,6 +197,7 @@ public class NewJFrame extends javax.swing.JFrame {
 		}
 	}
 
+
 	public class DisconnectAction implements ActionListener {
 
 		@Override
@@ -195,6 +209,10 @@ public class NewJFrame extends javax.swing.JFrame {
 					getjTextArea1().setText("");
 					incoming.disconnect();
 					incoming = null;
+					getjButton5().setEnabled(false);
+					getjButton2().setEnabled(true);
+					jButton4.setEnabled(true);
+					jButton1.setEnabled(false);
 					remLog.setText("   Rem login:" + RemoteLogin);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -221,6 +239,11 @@ public class NewJFrame extends javax.swing.JFrame {
 						Caller caller = new Caller(locLogin, arr.get(i).getIp(), m);
 						try {
 							incoming = caller.call();
+							if (incoming != null) {
+								getjButton1().setEnabled(true);
+								getjButton2().setEnabled(false);
+								jButton4.setEnabled(false);
+							}
 							setClt(new CommandListenerThread2(incoming));
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -282,7 +305,8 @@ public class NewJFrame extends javax.swing.JFrame {
 				try {
 					Calendar cal = Calendar.getInstance();
 					Date d = cal.getTime();
-					getjTextArea1().append(locLogin + ": " + message + "    " + d.getHours() + ":" + d.getMinutes() + ";\n");
+					getjTextArea1()
+							.append(locLogin + ": " + message + "    " + d.getHours() + ":" + d.getMinutes() + ";\n");
 					System.out.println(message);
 					System.out.println(incoming);
 					incoming.sendMessage(message);
@@ -316,14 +340,13 @@ public class NewJFrame extends javax.swing.JFrame {
 	private void initComponents() {
 		jList1 = new JList();
 		jList1.setFixedCellHeight(30);
-
 		arr = new ArrayList<contact>();
 
 		/** Блок для считывания контактов */
 		int counter = 0;
 		String name = "", ip = "";
 
-		File file = new File("D:\\ContactsList.txt");
+		File file = new File("ContactsList.txt");
 		Scanner scFile = null;
 		try {
 			scFile = new Scanner(file);
@@ -363,7 +386,7 @@ public class NewJFrame extends javax.swing.JFrame {
 				/** Блок для считывания контактво */
 				FileWriter writer = null;
 				try {
-					writer = new FileWriter("D:\\ContactsList.txt");
+					writer = new FileWriter("ContactsList.txt");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -444,7 +467,9 @@ public class NewJFrame extends javax.swing.JFrame {
 		jButton4.setText("write");
 		WriteAction wa = new WriteAction(this);
 		jButton4.addActionListener(wa);
+
 		jButton5.setText("+");
+		jButton5.setEnabled(false);
 		plusAction pa = new plusAction();
 		jButton5.addActionListener(pa);
 
@@ -470,6 +495,7 @@ public class NewJFrame extends javax.swing.JFrame {
 		jButton1.setText("disconnect");
 		DisconnectAction da = new DisconnectAction();
 		jButton1.addActionListener(da);
+		jButton1.setEnabled(false);
 
 		jButton2.setText("connect");
 		CallAction ca = new CallAction(this);
@@ -615,6 +641,36 @@ public class NewJFrame extends javax.swing.JFrame {
 	public void setjTextArea1(javax.swing.JTextArea jTextArea1) {
 		this.jTextArea1 = jTextArea1;
 	}
+
+	public javax.swing.JButton getjButton1() {
+		return jButton1;
+	}
+
+	public void setjButton1(javax.swing.JButton jButton1) {
+		this.jButton1 = jButton1;
+	}
+
+	public javax.swing.JButton getjButton5() {
+		return jButton5;
+	}
+
+	public void setjButton5(javax.swing.JButton jButton5) {
+		this.jButton5 = jButton5;
+	}
+
+	public javax.swing.JButton getjButton2() {
+		return jButton2;
+	}
+
+	public void setjButton2(javax.swing.JButton jButton2) {
+		this.jButton2 = jButton2;
+	}
+
+	public javax.swing.JButton getjButton4() {
+		return jButton4;
+	}
+
+
 
 	// Variables declaration - do not modify
 

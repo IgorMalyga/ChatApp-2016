@@ -1,4 +1,4 @@
-
+package Chat;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -25,6 +25,7 @@ public class connection_request  {
     private Socket s;
     private String rem_login="username";
     CallListenerThread clt;
+    NewJFrame m;
     /**
      * Launch the application.
      */
@@ -44,7 +45,7 @@ public class connection_request  {
     /**
      * Create the application.
      */
-    public connection_request(Socket s1,String log,CallListenerThread clt) throws IOException {
+    public connection_request(Socket s1,String log,CallListenerThread clt,NewJFrame m) throws IOException {
         this.clt=clt;
         System.out.println(log+"dop form got login");
     	rem_login=log;
@@ -52,6 +53,7 @@ public class connection_request  {
         initialize();
         this.frmIteration.setVisible(true);
         localLogin=clt.getLocalLogin();
+        this.m=m;
     }
     public class AcceptAction implements ActionListener{
 
@@ -62,7 +64,6 @@ public class connection_request  {
                 c=new Connection(s);
                 c.sendnNickHello( localLogin );
                 clt.setConnection(c);
-               
                 //rem_login=c.getNickHello();
                 frmIteration.dispose();
             } catch (IOException e) {
@@ -76,7 +77,17 @@ public class connection_request  {
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            clt.m.setConnection(null);
+        	try {
+				c=new Connection(s);
+				  m.getjButton1().setEnabled(false);
+	                m.getjButton4().setEnabled(true);
+	                m.getjButton2().setEnabled(true);
+				c.sendReject();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	clt.m.setConnection(null);
 			frmIteration.dispose();
         }
 
